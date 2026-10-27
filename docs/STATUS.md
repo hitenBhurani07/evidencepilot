@@ -10,8 +10,9 @@
 - **Live Gemini test:** NOT RUN (Offline mock verification complete)
 - **Live search test:** NOT RUN (Offline mock verification complete)
 - **Credentials:** Offline mode verified; full pipeline confirmed working in mock mode without leaking keys.
-- **Remote GitHub repository:** PENDING HUMAN ACTION (See `docs/HUMAN_ACTIONS.md` -> H-003)
+- **Remote GitHub repository:** VERIFIED (`https://github.com/hitenBhurani07/evidencepilot`)
 - **Demo video/link:** PENDING HUMAN ACTION (See `docs/HUMAN_ACTIONS.md` -> H-004; runbook ready in `docs/DEMO_RUNBOOK.md`)
+
 
 ## Stage checklist
 - [x] Stage 01 — requirements/repository skeleton (PASS)

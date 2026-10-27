@@ -19,8 +19,9 @@ This document is the final verification record for the Predixion AI Platform Eng
 | **User Interfaces** | Streamlit Web UI + Headless CLI | **VERIFIED PASS** | [`app.py`](../app.py) (starts on :8501), [`cli.py`](../cli.py) |
 | **Demo Runbook** | 3–5 min script with happy path & failure path | **VERIFIED PASS** | [`docs/DEMO_RUNBOOK.md`](DEMO_RUNBOOK.md) |
 | **AI Usage Disclosure** | Transparent disclosure of AI-assisted engineering | **VERIFIED PASS** | [`docs/AI_USAGE_DISCLOSURE.md`](AI_USAGE_DISCLOSURE.md) |
-| **Public/Shared GitHub Repo** | Remote URL containing full code and history | **PENDING USER ACTION** | Step-by-step instructions in [`docs/HUMAN_ACTIONS.md`](HUMAN_ACTIONS.md) (H-003) |
+| **Public/Shared GitHub Repo** | Remote URL containing full code and history | **VERIFIED PASS** | [`https://github.com/hitenBhurani07/evidencepilot`](https://github.com/hitenBhurani07/evidencepilot) |
 | **Demo Video Link** | 3–5 min walk-through with viewing permissions | **PENDING USER ACTION** | Step-by-step instructions in [`docs/HUMAN_ACTIONS.md`](HUMAN_ACTIONS.md) (H-004) |
+
 
 ---
 
