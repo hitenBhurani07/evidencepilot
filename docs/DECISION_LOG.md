@@ -63,3 +63,9 @@
   1. Layer 1 (Planner Resilience): If the LLM fails to generate a plan, generate a typed deterministic fallback plan (`web_search` -> `fetch_page` -> `quality_filter`) so research execution can still proceed.
   2. Layer 2 (Zero-Evidence Truthfulness): If all search queries fail or return 0 verified sources, do NOT prompt the LLM to hallucinate facts. Instead, return a structured refusal with `confidence_score = 0.0`, explicit failure reasons, and suggested next steps.
 - **Tradeoff:** Low confidence responses are returned instead of speculative answers, strictly upholding academic and production truthfulness standards.
+
+## D-011 — Strict Citation Validation and Hallucination Stripping
+- **Status:** Approved (Stage 05).
+- **Context:** LLMs frequently hallucinate source IDs (e.g. citing `[S99]` when only `S1` and `S2` were provided in context).
+- **Choice:** Implement client-side set validation of all `source_ids` in `ResearchSynthesizer._validate_and_sanitize_citations()`. Automatically discard any ID that does not map to a source actually retrieved in the current run, penalizing confidence if all citations on a finding were invalid.
+- **Consequences:** Prevents phantom citations and guarantees 100% provenance verification for end users.

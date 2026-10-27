@@ -122,3 +122,25 @@
 - **Decision log references:** D-010.
 - **Acceptance gate:** PASS
 - **Next step:** Stage 05 — Grounded Synthesis and Structured Results.
+
+---
+
+### Entry 05 — 2026-10-27 (Stage 05: Grounded Synthesis and Structured Results)
+- **Date/time and stage:** 2026-10-27T14:54:00+05:30 / Stage 05
+- **Goal:** Implement evidence-grounded answer synthesis (`ResearchSynthesizer`), strict citation set validation, untrusted prompt injection delimiter isolation, calibrated confidence rationale, deterministic markdown report formatting (`format_answer_markdown`), and integration into `ResearchOrchestrator`.
+- **Files changed:**
+  - `src/evidencepilot/agent/synthesizer.py`: `ResearchSynthesizer`, `SynthesisPayload`, `format_answer_markdown`.
+  - `src/evidencepilot/agent/orchestrator.py`: Integrated `ResearchSynthesizer` into default synthesis step.
+  - `src/evidencepilot/agent/__init__.py`: Exported synthesizer symbols.
+  - `tests/test_synthesis.py`: 5 tests covering happy path, hallucinated citation stripping, ungrounded finding confidence penalty, provider error fallback, and markdown export.
+  - `docs/DECISION_LOG.md`: Added D-011.
+- **What changed and why:**
+  - Grounded answer synthesis exclusively in sources collected during current execution.
+  - Enforced client-side set validation of all cited `source_ids`, stripping hallucinated references and penalizing ungrounded claims.
+  - Added clean GitHub Markdown presentation formatter for publication-ready reports.
+- **Commands/checks run:**
+  - `.venv\Scripts\pytest` -> 41 passed in 2.23s.
+- **Defects found/fixed:** None.
+- **Decision log references:** D-011.
+- **Acceptance gate:** PASS
+- **Next step:** Stage 06 — Reliability, Security, and Logging.

@@ -9,6 +9,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 from evidencepilot.agent.events import EventBus, WorkflowEventType
 from evidencepilot.agent.planner import ResearchPlanner
+from evidencepilot.agent.synthesizer import ResearchSynthesizer
 from evidencepilot.providers.base import LLMProvider, SearchProvider
 from evidencepilot.providers.fakes import FakeLLMProvider, FakeSearchProvider
 from evidencepilot.schemas.research import (
@@ -49,7 +50,7 @@ class ResearchOrchestrator:
         self.planner = planner or ResearchPlanner(llm_provider=self.llm)
         self.event_bus = event_bus or EventBus()
         self.search_tool = SearchTool(provider=self.search_provider)
-        self.synthesizer = synthesizer
+        self.synthesizer = synthesizer or (lambda req, src, meta: ResearchSynthesizer(self.llm).synthesize(req, src, meta))
 
     def execute(self, request: ResearchRequest) -> StructuredAnswer:
         """Run the end-to-end research workflow."""
