@@ -70,3 +70,29 @@
 - **Decision log references:** D-003, D-004, D-006, D-007.
 - **Acceptance gate:** PASS
 - **Next step:** Stage 03 — Research tools and source quality (search tool, page content extractor, safe URL filter, quality scoring).
+
+---
+
+### Entry 03 — 2026-10-27 (Stage 03: Research Tools and Source Quality)
+- **Date/time and stage:** 2026-10-27T14:47:00+05:30 / Stage 03
+- **Goal:** Implement the two core research tools (web search tool and page content extractor), strict SSRF protection (scheme checks, private IP blocking, manual redirect validation), source quality heuristics and deduplication, and prompt injection defense fixtures.
+- **Files changed:**
+  - `src/evidencepilot/tools/url_policy.py`: `validate_target_url`, `is_ip_private_or_local`, `canonicalize_url`.
+  - `src/evidencepilot/tools/extractor.py`: `PageExtractor`, `ExtractionResult` with timeout, byte streaming limit (512 KB), redirect validation, and HTML sanitization.
+  - `src/evidencepilot/tools/search.py`: `SearchTool` translating provider search outputs into normalized `SourceItem`s.
+  - `src/evidencepilot/tools/source_scorer.py`: `SourceQualityFilter`, `compute_source_quality_score` with domain and content depth scoring.
+  - `src/evidencepilot/tools/__init__.py`: Exported tools.
+  - `tests/test_tools.py`: 11 new tests covering SSRF blocks, redirect loops, byte limits, extraction, deduplication, and prompt injection isolation.
+  - `docs/FAILURE_AND_LEARNING_LOG.md`: Added FL-002.
+  - `docs/DECISION_LOG.md`: Added D-008 and D-009.
+- **What changed and why:**
+  - Implemented SSRF and malicious redirect protection to ensure the agent can never query internal/local IP addresses or cloud metadata endpoints.
+  - Implemented text extraction that removes scripts and noisy layout elements to prevent execution of untrusted code and mitigate prompt injection attacks.
+  - Implemented source canonicalization and deduplication to maintain clean, non-redundant evidence sets.
+- **Commands/checks run:**
+  - `.venv\Scripts\pytest` -> 30 passed in 4.50s.
+- **Defects found/fixed:**
+  - FL-002: In `SourceQualityFilter`, sources without explicit domain field were not auto-extracting domain from URL. Fixed by parsing domain from URL in `compute_source_quality_score` and `process()`.
+- **Decision log references:** D-008, D-009.
+- **Acceptance gate:** PASS
+- **Next step:** Stage 04 — Planner and Orchestrator.

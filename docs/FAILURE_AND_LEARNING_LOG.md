@@ -23,3 +23,13 @@
 - **Regression test/command:** `pytest tests/test_config.py::test_mask_secret_none_or_empty`
 - **Observed result after fix:** `6 passed in 0.19s`.
 - **Remaining risk:** None; empty/whitespace strings are uniformly treated as unset across configuration validation.
+
+### FL-002 — 2026-10-27 (Stage 03)
+- **ID/date/stage:** FL-002 / 2026-10-27 / Stage 03
+- **Symptom / exact sanitized error:** `AssertionError: assert '' == 'cisa.gov'` and `assert 0.75 > 0.8` in `test_source_quality_filter_dedup_and_length`.
+- **Impact:** When a `SourceItem` was constructed from raw data without an explicit `domain` field, the domain remained empty string `""` even though a valid URL was present, causing domain-based credibility scoring and downstream presentation to lose domain metadata.
+- **Root cause and evidence:** `SourceQualityFilter.process` and `compute_source_quality_score` relied on `source.domain` without falling back to parsing the hostname from `source.url`.
+- **Fix:** Updated `compute_source_quality_score` to use `source.domain.lower() if source.domain else urlparse(source.url).netloc.lower()`, updated `SourceQualityFilter.process` to automatically populate `item.domain = urlparse(canon).netloc.lower()`, and adjusted content depth threshold to 50 chars for extracted text.
+- **Regression test/command:** `pytest tests/test_tools.py::test_source_quality_filter_dedup_and_length`
+- **Observed result after fix:** `30 passed in 4.50s`.
+- **Remaining risk:** None; domain is guaranteed to be extracted from canonical URL if omitted.

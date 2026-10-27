@@ -43,3 +43,15 @@
 - **Context:** LLM and search APIs can change response formats, fail unexpectedly, or return malformed JSON.
 - **Choice:** Define strict `LLMProvider` and `SearchProvider` protocols in `base.py`. Enforce client-side Pydantic validation on parsed responses and map errors into sanitized domain exceptions (`AuthError`, `RateLimitError`, `NetworkError`, `SchemaValidationError`).
 - **Consequences:** Eliminates secret leaks in stack traces, guarantees schema compliance before synthesis reaches the user, and enables seamless switching between deterministic test doubles and live providers.
+
+## D-008 — SSRF Protection and Manual Redirect Verification
+- **Status:** Approved (Stage 03).
+- **Context:** An autonomous agent fetching web pages could be tricked by search results or 302 redirects into querying internal infrastructure, loopback services (`localhost`, `127.0.0.1`), or cloud metadata endpoints (`169.254.169.254`).
+- **Choice:** Validate URLs before request execution, block private/loopback/link-local IP addresses, and manually handle HTTP redirects up to a maximum depth of 3 so every intermediate redirect target is re-validated against the SSRF policy before connection.
+- **Tradeoff:** Adds a small resolution overhead; legitimately internal intranet URLs are blocked by design.
+
+## D-009 — Untrusted Evidence Isolation and De-scripting
+- **Status:** Approved (Stage 03).
+- **Context:** Web pages retrieved by the agent may contain prompt injection attacks, malicious scripts, or adversarial instructions intended to hijack LLM synthesis.
+- **Choice:** Decompose `<script>`, `<style>`, `<nav>`, `<footer>` tags before extracting plain text; wrap all retrieved web text in explicit data delimiters; treat page content solely as passive observational data, never as prompt instructions.
+- **Consequences:** Mitigates indirect prompt injection while preserving factual article narrative.
