@@ -33,3 +33,13 @@
 - **Regression test/command:** `pytest tests/test_tools.py::test_source_quality_filter_dedup_and_length`
 - **Observed result after fix:** `30 passed in 4.50s`.
 - **Remaining risk:** None; domain is guaranteed to be extracted from canonical URL if omitted.
+
+### FL-003 — 2026-10-27 (Stage 04)
+- **ID/date/stage:** FL-003 / 2026-10-27 / Stage 04
+- **Symptom / exact sanitized error:** `AssertionError: assert 0.75 == 0.0` in `test_orchestrator_total_tools_failure`.
+- **Impact:** When testing the zero-evidence / tool-failure workflow with `FakeSearchProvider(default_results=[])`, the test double returned two fallback search results instead of an empty list, preventing the orchestrator from triggering its zero-evidence branch.
+- **Root cause and evidence:** In `FakeSearchProvider.__init__`, the assignment was `self.default_results = default_results or [...]`. Because an empty list `[]` is falsy in Python, the expression evaluated to the non-empty default list.
+- **Fix:** Changed the initialization to explicitly check `if default_results is not None:` before falling back to default results.
+- **Regression test/command:** `pytest tests/test_agent.py::test_orchestrator_total_tools_failure`
+- **Observed result after fix:** `36 passed in 3.17s`.
+- **Remaining risk:** None; empty lists are correctly preserved across all test providers.

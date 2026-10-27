@@ -96,3 +96,29 @@
 - **Decision log references:** D-008, D-009.
 - **Acceptance gate:** PASS
 - **Next step:** Stage 04 — Planner and Orchestrator.
+
+---
+
+### Entry 04 — 2026-10-27 (Stage 04: Planner and Orchestrator)
+- **Date/time and stage:** 2026-10-27T14:51:00+05:30 / Stage 04
+- **Goal:** Implement explicit single-agent planning (`ResearchPlanner`), execution orchestration (`ResearchOrchestrator`), event bus observability (`EventBus`), budget bounds enforcement, partial tool failure handling, and zero-evidence structured refusal.
+- **Files changed:**
+  - `src/evidencepilot/agent/events.py`: `WorkflowEventType`, `WorkflowEvent`, `EventBus`.
+  - `src/evidencepilot/agent/planner.py`: `ResearchPlanner` with step bounds and deterministic fallback.
+  - `src/evidencepilot/agent/orchestrator.py`: `ResearchOrchestrator` coordinating search, page fetch, quality filtering, and failure recovery.
+  - `src/evidencepilot/agent/__init__.py`: Exported agent classes.
+  - `src/evidencepilot/providers/fakes.py`: Fixed `FakeSearchProvider` default results check.
+  - `tests/test_agent.py`: 6 tests covering happy path, event sequence, partial page extraction failure, zero-evidence refusal, and query budget caps.
+  - `docs/FAILURE_AND_LEARNING_LOG.md`: Added FL-003.
+  - `docs/DECISION_LOG.md`: Added D-010.
+- **What changed and why:**
+  - Visible plan is generated before any tool runs; each step has explicit purpose, tool, and input.
+  - Connected real tools (Search and PageExtractor) in the execution path.
+  - Ensured that partial failures (one URL failing) do not crash the run, and total failures (no evidence) produce a structured zero-confidence response without hallucinations.
+- **Commands/checks run:**
+  - `.venv\Scripts\pytest` -> 36 passed in 3.17s.
+- **Defects found/fixed:**
+  - FL-003: In `FakeSearchProvider`, passing `default_results=[]` was evaluated as falsy, triggering the default non-empty list fallback. Fixed by checking `if default_results is not None:`.
+- **Decision log references:** D-010.
+- **Acceptance gate:** PASS
+- **Next step:** Stage 05 — Grounded Synthesis and Structured Results.

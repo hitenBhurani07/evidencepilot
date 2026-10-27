@@ -55,3 +55,11 @@
 - **Context:** Web pages retrieved by the agent may contain prompt injection attacks, malicious scripts, or adversarial instructions intended to hijack LLM synthesis.
 - **Choice:** Decompose `<script>`, `<style>`, `<nav>`, `<footer>` tags before extracting plain text; wrap all retrieved web text in explicit data delimiters; treat page content solely as passive observational data, never as prompt instructions.
 - **Consequences:** Mitigates indirect prompt injection while preserving factual article narrative.
+
+## D-010 — Two-Layer Failure Resilience & Truthful Refusal
+- **Status:** Approved (Stage 04).
+- **Context:** External tool invocations (LLMs, web searches, network requests) are inherently nondeterministic and prone to timeouts or rate limits.
+- **Choice:** 
+  1. Layer 1 (Planner Resilience): If the LLM fails to generate a plan, generate a typed deterministic fallback plan (`web_search` -> `fetch_page` -> `quality_filter`) so research execution can still proceed.
+  2. Layer 2 (Zero-Evidence Truthfulness): If all search queries fail or return 0 verified sources, do NOT prompt the LLM to hallucinate facts. Instead, return a structured refusal with `confidence_score = 0.0`, explicit failure reasons, and suggested next steps.
+- **Tradeoff:** Low confidence responses are returned instead of speculative answers, strictly upholding academic and production truthfulness standards.

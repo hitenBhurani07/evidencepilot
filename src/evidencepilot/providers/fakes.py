@@ -134,20 +134,23 @@ class FakeSearchProvider:
         query_responses: Optional[Dict[str, List[SearchResult]]] = None,
         simulate_error: Optional[Exception] = None,
     ):
-        self.default_results: List[SearchResult] = default_results or [
-            SearchResult(
-                url="https://en.wikipedia.org/wiki/Artificial_intelligence",
-                title="Artificial intelligence - Wikipedia",
-                snippet="Artificial intelligence is the intelligence of machines or software.",
-                score=0.95,
-            ),
-            SearchResult(
-                url="https://arxiv.org/abs/2301.00001",
-                title="Recent Advances in AI Research",
-                snippet="We present a comprehensive overview of recent advances in AI systems.",
-                score=0.88,
-            ),
-        ]
+        if default_results is not None:
+            self.default_results: List[SearchResult] = default_results
+        else:
+            self.default_results = [
+                SearchResult(
+                    url="https://en.wikipedia.org/wiki/Artificial_intelligence",
+                    title="Artificial intelligence - Wikipedia",
+                    snippet="Artificial intelligence is the intelligence of machines or software.",
+                    score=0.95,
+                ),
+                SearchResult(
+                    url="https://arxiv.org/abs/2301.00001",
+                    title="Recent Advances in AI Research",
+                    snippet="We present a comprehensive overview of recent advances in AI systems.",
+                    score=0.88,
+                ),
+            ]
         self.query_responses: Dict[str, List[SearchResult]] = query_responses or {}
         self.simulate_error = simulate_error
         self.queries_executed: List[str] = []

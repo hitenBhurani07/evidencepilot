@@ -1,12 +1,12 @@
 # Project Status
 
 - **Project:** EvidencePilot
-- **Current stage:** Stage 03 complete -> Ready for Stage 04
-- **Overall gate:** PASS (Stages 01, 02, and 03 passed)
-- **Last test command/result:** `.venv\Scripts\pytest` -> `30 passed in 4.50s`
-- **Live Gemini test:** NOT RUN (Stage 03 offline gate)
-- **Live search test:** NOT RUN (Stage 03 offline gate)
-- **Credentials:** Offline mode verified; both core research tools (SearchTool, PageExtractor) and source filter verified with deterministic test doubles and network mocks.
+- **Current stage:** Stage 04 complete -> Ready for Stage 05
+- **Overall gate:** PASS (Stages 01, 02, 03, and 04 passed)
+- **Last test command/result:** `.venv\Scripts\pytest` -> `36 passed in 3.17s`
+- **Live Gemini test:** NOT RUN (Stage 04 offline gate)
+- **Live search test:** NOT RUN (Stage 04 offline gate)
+- **Credentials:** Offline mode verified; planner, orchestrator, tools, and event tracking pass unit and integration tests.
 - **Remote GitHub repository:** NOT VERIFIED (Local git repo initialized; no remote configured yet)
 - **Demo video/link:** NOT CREATED
 
@@ -14,7 +14,7 @@
 - [x] Stage 01 — requirements/repository skeleton (PASS)
 - [x] Stage 02 — schemas/config/provider contracts (PASS)
 - [x] Stage 03 — search/extraction/source hygiene (PASS)
-- [ ] Stage 04 — planner/orchestrator
+- [x] Stage 04 — planner/orchestrator (PASS)
 - [ ] Stage 05 — grounded synthesis/schema validation
 - [ ] Stage 06 — reliability/security/logging
 - [ ] Stage 07 — evaluation/tests/sample outputs
@@ -22,7 +22,7 @@
 - [ ] Stage 09 — final audit/docs/submission handoff
 
 ## Current blockers
-None for offline stages. Live API tests will be conducted after complete agent orchestration is implemented.
+None for offline stages. Live API tests will be conducted after grounded synthesis and security hardening are verified.
 
 ## Update rule
 Antigravity updates this file after every stage, test milestone, credential handoff, and blocker change. Never rewrite `NOT RUN` to `PASS` without evidence.
