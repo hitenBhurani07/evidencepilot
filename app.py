@@ -9,11 +9,16 @@ Without credentials the app runs in offline/mock mode automatically.
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
 import time
 from typing import Optional
 
 import streamlit as st
 from dotenv import load_dotenv
+
+# Allow running from project root without package installation
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 # Load .env if present (keys never logged or displayed)
 load_dotenv(dotenv_path=".env", override=False)
