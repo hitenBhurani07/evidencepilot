@@ -166,3 +166,56 @@
 - **Defects found/fixed:** None.
 - **Acceptance gate:** PASS
 - **Next step:** Stage 07 — Evaluation, Tests, and Sample Outputs.
+
+---
+
+### Entry 07 — 2026-10-27 (Stage 07: Evaluation Framework and Artifact Generation)
+- **Date/time and stage:** 2026-10-27T15:00:00+05:30 / Stage 07
+- **Goal:** Build the benchmark evaluation framework with 5 distinct query archetypes (`scripts/run_evaluation.py`), rigorous unit tests (`tests/test_evaluation.py`), evaluation rubric (`docs/EVALUATION_RUBRIC.md`), and deterministic artifact generation (`artifacts/eval_01-05_mock_output.json`, `artifacts/evaluation_report.json`).
+- **Files changed:**
+  - `tests/test_evaluation.py`: 6 automated evaluation test cases.
+  - `scripts/run_evaluation.py`: Standalone CLI benchmark runner generating structured JSON output.
+  - `docs/EVALUATION_RUBRIC.md`: Detailed evaluation criteria for comparative, entity discovery, pros/cons, time-sensitive, and unanswerable archetypes.
+  - `artifacts/eval_01_mock_output.json` through `artifacts/eval_05_mock_output.json`
+  - `artifacts/evaluation_report.json`
+- **Commands/checks run:**
+  - `.venv\Scripts\pytest tests/test_evaluation.py` -> 6 passed
+  - `.venv\Scripts\python scripts/run_evaluation.py` -> 5 PASS | 0 FAIL | 0 ERROR
+- **Acceptance gate:** PASS
+- **Next step:** Stage 08 — Streamlit Demo and UX.
+
+---
+
+### Entry 08 — 2026-10-27 (Stage 08: Streamlit Web UI and CLI Demo)
+- **Date/time and stage:** 2026-10-27T15:05:00+05:30 / Stage 08
+- **Goal:** Implement the interactive Streamlit user interface (`app.py`) and command-line entrypoint (`cli.py`), supporting both mock and live execution modes, real-time progress callbacks, structured JSON export, and error resilience.
+- **Files changed:**
+  - `app.py`: Streamlit web interface with real-time progress, plan inspection, source table, markdown report, and raw JSON export.
+  - `cli.py`: Windows-compatible headless CLI with UTF-8 stdout reconfiguration, argument parsing, and structured formatting.
+- **Commands/checks run:**
+  - `.venv\Scripts\python cli.py "What are the latest breakthroughs in solid-state battery technology?" --mock` -> Happy path VERIFIED
+  - `.venv\Scripts\python cli.py "bad" --mock` -> Short input rejected with clear error message
+  - `.venv\Scripts\python -m streamlit run app.py` -> Started cleanly on port 8501
+- **Acceptance gate:** PASS
+- **Next step:** Stage 09 — Final Audit, Documentation, and Submission Handoff.
+
+---
+
+### Entry 09 — 2026-10-27 (Stage 09: Final Audit, Documentation, and Submission Handoff)
+- **Date/time and stage:** 2026-10-27T19:22:00+05:30 / Stage 09
+- **Goal:** Complete final verification audit across all 9 stages: verify 70-test offline suite, run evaluation benchmark, ensure `.env` and secrets are not tracked, write production-grade `README.md`, update `docs/DEMO_RUNBOOK.md` and `docs/AI_USAGE_DISCLOSURE.md`, provide `docs/SUBMISSION_CHECKLIST.md`, and outline clear numbered human steps in `docs/HUMAN_ACTIONS.md` for GitHub remote creation and video recording.
+- **Files changed:**
+  - `README.md`: Complete rewrite with architecture diagrams, requirements traceability, installation, API config, test commands, schema description, security details, and scaling roadmap.
+  - `docs/DEMO_RUNBOOK.md`: Comprehensive 4-minute presentation script covering happy path, tool visibility, citations, and unanswerable refusal.
+  - `docs/AI_USAGE_DISCLOSURE.md`: Detailed honest disclosure of AI pair-programming methodology and student comprehension verification.
+  - `docs/SUBMISSION_CHECKLIST.md`: Verification audit matrix covering all assignment deliverables.
+  - `docs/HUMAN_ACTIONS.md`: Exact click-by-click instructions for creating and pushing GitHub repository (H-003) and recording video (H-004).
+  - `docs/STATUS.md`: Updated to Stage 09 PASS.
+- **Commands/checks run:**
+  - `.venv\Scripts\pytest tests\ -v` -> 70 passed in 7.91s
+  - `.venv\Scripts\python scripts\run_evaluation.py` -> 5 PASS | 0 FAIL | 0 ERROR
+  - `git check-ignore -v .env` -> Confirmed ignored by .gitignore
+  - Secret scan on git tracked files -> Confirmed 0 live secrets
+- **Acceptance gate:** PASS
+- **Next step:** Present human-only actions (GitHub repo creation & demo video) to user.
+

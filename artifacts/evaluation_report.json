@@ -1,7 +1,7 @@
 {
   "report_version": "1.0",
   "run_mode": "MOCK_OFFLINE",
-  "run_timestamp": "2026-10-27T09:35:50+00:00",
+  "run_timestamp": "2026-10-27T19:19:52+00:00",
   "evaluations": [
     {
       "eval_id": "EVAL-01",
@@ -18,7 +18,7 @@
         "One source may be biased towards one option"
       ],
       "run_mode": "MOCK_OFFLINE",
-      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "run_timestamp": "2026-10-27T19:19:52+00:00",
       "outcome": {
         "status": "PASS",
         "confidence_score": 0.85,
@@ -45,7 +45,7 @@
         "Some prominent researchers may not appear in top search results"
       ],
       "run_mode": "MOCK_OFFLINE",
-      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "run_timestamp": "2026-10-27T19:19:52+00:00",
       "outcome": {
         "status": "PASS",
         "confidence_score": 0.85,
@@ -72,7 +72,7 @@
         "Opinion-heavy sources may introduce bias"
       ],
       "run_mode": "MOCK_OFFLINE",
-      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "run_timestamp": "2026-10-27T19:19:52+00:00",
       "outcome": {
         "status": "PASS",
         "confidence_score": 0.85,
@@ -100,7 +100,7 @@
         "Live run should show papers from after training cutoff"
       ],
       "run_mode": "MOCK_OFFLINE",
-      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "run_timestamp": "2026-10-27T19:19:52+00:00",
       "outcome": {
         "status": "PASS_WITH_CAVEAT",
         "confidence_score": 0.85,
@@ -128,7 +128,7 @@
         "System must not confabulate a plausible-sounding number"
       ],
       "run_mode": "MOCK_OFFLINE",
-      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "run_timestamp": "2026-10-27T19:19:52+00:00",
       "outcome": {
         "status": "PASS",
         "confidence_score": 0.0,
