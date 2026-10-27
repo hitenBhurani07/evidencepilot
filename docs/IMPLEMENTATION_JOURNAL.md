@@ -42,3 +42,31 @@
 - **Decision log references:** D-001, D-002, D-005, D-006.
 - **Acceptance gate:** PASS
 - **Next step:** Stage 02 — Core schemas, configuration validation, and provider adapters.
+
+---
+
+### Entry 02 — 2026-10-27 (Stage 02: Schemas, Configuration, and Provider Contracts)
+- **Date/time and stage:** 2026-10-27T14:42:00+05:30 / Stage 02
+- **Goal:** Implement Pydantic domain models, provider abstraction protocols (`LLMProvider`, `SearchProvider`), sanitized exception hierarchy, Gemini wrapper with JSON schema enforcement, Tavily search adapter with bounded inputs and timeout control, deterministic test fakes (`FakeLLMProvider`, `FakeSearchProvider`), and unit tests.
+- **Files changed:**
+  - `src/evidencepilot/schemas/research.py`: `ResearchRequest`, `PlanStep`, `ResearchPlan`, `SourceItem`, `Finding`, `RunMetadata`, `StructuredAnswer`.
+  - `src/evidencepilot/schemas/__init__.py`: Exported schemas.
+  - `src/evidencepilot/providers/base.py`: Protocols (`LLMProvider`, `SearchProvider`), `SearchResult`, sanitized exceptions (`ProviderError`, `AuthError`, `RateLimitError`, `NetworkError`, `SchemaValidationError`).
+  - `src/evidencepilot/providers/fakes.py`: `FakeLLMProvider` and `FakeSearchProvider`.
+  - `src/evidencepilot/providers/gemini.py`: Production `GeminiProvider` using official `google-genai` SDK with markdown fence stripping and client-side Pydantic validation.
+  - `src/evidencepilot/providers/tavily.py`: Production `TavilySearchProvider` with input bounds and graceful malformed result skipping.
+  - `src/evidencepilot/providers/__init__.py`: Exported providers.
+  - `tests/test_schemas.py`: Schema validation unit tests.
+  - `tests/test_providers.py`: Provider adapter, fake, and error mapping tests.
+  - `docs/DECISION_LOG.md`: Added D-007.
+- **What changed and why:**
+  - Separated interface contracts from vendor APIs to allow deterministic offline testing and future provider substitution without touching core agent logic.
+  - Implemented sanitized error mapping so no API key or sensitive header can leak via exception messages or logs.
+  - Guaranteed that structured responses from LLMs undergo strict local Pydantic validation.
+- **Commands/checks run:**
+  - `.venv\Scripts\pytest` -> 19 passed in 1.32s
+  - `Test-Path .env` -> Confirmed `.env` does not exist in workspace, ensuring offline test integrity
+- **Defects found/fixed:** None.
+- **Decision log references:** D-003, D-004, D-006, D-007.
+- **Acceptance gate:** PASS
+- **Next step:** Stage 03 — Research tools and source quality (search tool, page content extractor, safe URL filter, quality scoring).
