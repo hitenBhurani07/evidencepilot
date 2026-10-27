@@ -1,0 +1,31 @@
+{
+  "eval_id": "EVAL-04",
+  "type": "time_sensitive",
+  "query": "What are the most significant AI safety research papers published in 2024?",
+  "expected_tools": [
+    "web_search",
+    "fetch_page",
+    "quality_filter"
+  ],
+  "expected_behavior": "Should note recency limitation; flag that mocked data may not reflect real 2024 publications",
+  "grounding_requirement": "Citations should include publication dates where available",
+  "edge_cases": [
+    "Mock mode cannot provide genuinely recent results",
+    "Live run should show papers from after training cutoff"
+  ],
+  "run_mode": "MOCK_OFFLINE",
+  "run_timestamp": "2026-10-27T09:35:50+00:00",
+  "outcome": {
+    "status": "PASS_WITH_CAVEAT",
+    "confidence_score": 0.85,
+    "sources_used": 5,
+    "short_answer_preview": "This is a deterministic fake synthesis payload answer for testing.",
+    "findings_count": 1,
+    "is_mock_run": true,
+    "caveat": "Mock run: temporal accuracy cannot be validated without live search"
+  },
+  "defects": [
+    "Mock mode cannot verify recency; live evaluation needed with Tavily credentials"
+  ],
+  "fix_status": "Pending live API credentials"
+}

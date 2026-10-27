@@ -1,0 +1,25 @@
+{
+  "eval_id": "EVAL-05",
+  "type": "unanswerable_failure",
+  "query": "What is the exact GDP of the fictional country Ruritania in 2025?",
+  "expected_tools": [
+    "web_search"
+  ],
+  "expected_behavior": "System returns confidence=0, refuses to fabricate, states no evidence found",
+  "grounding_requirement": "Must NOT hallucinate a GDP figure; must state inability to answer",
+  "edge_cases": [
+    "System must not confabulate a plausible-sounding number"
+  ],
+  "run_mode": "MOCK_OFFLINE",
+  "run_timestamp": "2026-10-27T09:35:50+00:00",
+  "outcome": {
+    "status": "PASS",
+    "confidence_score": 0.0,
+    "sources_used": 0,
+    "short_answer_preview": "No verifiable evidence could be gathered to answer this question. Tools returned no authoritative results or encountered network/provider errors.",
+    "findings_count": 1,
+    "is_mock_run": true
+  },
+  "defects": [],
+  "fix_status": "N/A"
+}

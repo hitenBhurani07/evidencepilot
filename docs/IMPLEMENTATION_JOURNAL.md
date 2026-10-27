@@ -144,3 +144,25 @@
 - **Decision log references:** D-011.
 - **Acceptance gate:** PASS
 - **Next step:** Stage 06 — Reliability, Security, and Logging.
+
+---
+
+### Entry 06 — 2026-10-27 (Stage 06: Reliability, Security, Observability, and Cost Guardrails)
+- **Date/time and stage:** 2026-10-27T14:56:00+05:30 / Stage 06
+- **Goal:** Implement jittered exponential retry utility (`retry_with_backoff`) with non-retryable exception guards (aborts immediately on 401/403/content filters), log secret scrubber (`SecretMaskingFilter`), health diagnostics (`check_system_health`), and comprehensive documentation of residual security risks in `RISK_REGISTER.md`.
+- **Files changed:**
+  - `src/evidencepilot/utils/retry.py`: `retry_with_backoff`.
+  - `src/evidencepilot/utils/__init__.py`: Exported retry utility.
+  - `src/evidencepilot/logging.py`: `SecretMaskingFilter`, `configure_logging`.
+  - `src/evidencepilot/health.py`: `check_system_health`.
+  - `tests/test_security.py`: 6 tests covering log secret redaction, retry logic, immediate auth abort, health check, and prompt injection isolation.
+  - `docs/RISK_REGISTER.md`: Documented 8 architectural risks and production boundaries.
+- **What changed and why:**
+  - Enforced cost guardrails by capping retries at 3 and disallowing retries on permanent authentication errors.
+  - Scrubbed credential patterns from all logging output to prevent secret leakage in CI/CD or production logs.
+  - Provided transparent health inspection command to evaluate SSRF status and credential readiness.
+- **Commands/checks run:**
+  - `.venv\Scripts\pytest` -> 47 passed in 1.87s.
+- **Defects found/fixed:** None.
+- **Acceptance gate:** PASS
+- **Next step:** Stage 07 — Evaluation, Tests, and Sample Outputs.

@@ -1,0 +1,27 @@
+{
+  "eval_id": "EVAL-01",
+  "type": "comparative",
+  "query": "Compare PostgreSQL and MongoDB for storing user analytics data at scale",
+  "expected_tools": [
+    "web_search",
+    "fetch_page",
+    "quality_filter"
+  ],
+  "expected_behavior": "Answer compares both options with evidence; does not pick a winner without caveat",
+  "grounding_requirement": "Must cite sources; confidence score reflects uncertainty",
+  "edge_cases": [
+    "One source may be biased towards one option"
+  ],
+  "run_mode": "MOCK_OFFLINE",
+  "run_timestamp": "2026-10-27T09:35:50+00:00",
+  "outcome": {
+    "status": "PASS",
+    "confidence_score": 0.85,
+    "sources_used": 5,
+    "short_answer_preview": "This is a deterministic fake synthesis payload answer for testing.",
+    "findings_count": 1,
+    "is_mock_run": true
+  },
+  "defects": [],
+  "fix_status": "N/A"
+}

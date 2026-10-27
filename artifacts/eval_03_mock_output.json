@@ -1,0 +1,27 @@
+{
+  "eval_id": "EVAL-03",
+  "type": "technical_pros_cons",
+  "query": "What are the pros and cons of using Rust for systems programming compared to C?",
+  "expected_tools": [
+    "web_search",
+    "fetch_page",
+    "quality_filter"
+  ],
+  "expected_behavior": "Structured pro/con list; honest about trade-offs; does not declare a definitive winner",
+  "grounding_requirement": "Pros and cons traceable to cited technical sources",
+  "edge_cases": [
+    "Opinion-heavy sources may introduce bias"
+  ],
+  "run_mode": "MOCK_OFFLINE",
+  "run_timestamp": "2026-10-27T09:35:50+00:00",
+  "outcome": {
+    "status": "PASS",
+    "confidence_score": 0.85,
+    "sources_used": 5,
+    "short_answer_preview": "This is a deterministic fake synthesis payload answer for testing.",
+    "findings_count": 1,
+    "is_mock_run": true
+  },
+  "defects": [],
+  "fix_status": "N/A"
+}

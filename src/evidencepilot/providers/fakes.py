@@ -96,6 +96,22 @@ class FakeLLMProvider:
                 "estimated_search_queries": 1,
                 "estimated_target_urls": 1,
             }
+        if name == "SynthesisPayload":
+            return {
+                "short_answer": "This is a deterministic fake synthesis payload answer for testing.",
+                "key_findings": [
+                    {
+                        "statement": "Deterministic finding grounded in test evidence.",
+                        "source_ids": ["S1"],
+                        "confidence": 0.85,
+                    }
+                ],
+                "confidence_score": 0.85,
+                "confidence_rationale": "Deterministic fake — high simulated confidence for test purposes.",
+                "assumptions": ["Fake test environment."],
+                "limitations": ["Mock data only; not real synthesis."],
+                "next_steps": ["Verify with live sources."],
+            }
         if name == "StructuredAnswer":
             return {
                 "question": "Sample Question",

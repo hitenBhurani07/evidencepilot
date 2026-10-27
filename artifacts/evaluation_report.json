@@ -1,0 +1,187 @@
+{
+  "report_version": "1.0",
+  "run_mode": "MOCK_OFFLINE",
+  "run_timestamp": "2026-10-27T09:35:50+00:00",
+  "evaluations": [
+    {
+      "eval_id": "EVAL-01",
+      "type": "comparative",
+      "query": "Compare PostgreSQL and MongoDB for storing user analytics data at scale",
+      "expected_tools": [
+        "web_search",
+        "fetch_page",
+        "quality_filter"
+      ],
+      "expected_behavior": "Answer compares both options with evidence; does not pick a winner without caveat",
+      "grounding_requirement": "Must cite sources; confidence score reflects uncertainty",
+      "edge_cases": [
+        "One source may be biased towards one option"
+      ],
+      "run_mode": "MOCK_OFFLINE",
+      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "outcome": {
+        "status": "PASS",
+        "confidence_score": 0.85,
+        "sources_used": 5,
+        "short_answer_preview": "This is a deterministic fake synthesis payload answer for testing.",
+        "findings_count": 1,
+        "is_mock_run": true
+      },
+      "defects": [],
+      "fix_status": "N/A"
+    },
+    {
+      "eval_id": "EVAL-02",
+      "type": "entity_discovery",
+      "query": "Who are the leading researchers in interpretable machine learning?",
+      "expected_tools": [
+        "web_search",
+        "fetch_page",
+        "quality_filter"
+      ],
+      "expected_behavior": "Lists specific named researchers with institution affiliations and notable contributions",
+      "grounding_requirement": "Entity names must be traceable to cited sources",
+      "edge_cases": [
+        "Some prominent researchers may not appear in top search results"
+      ],
+      "run_mode": "MOCK_OFFLINE",
+      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "outcome": {
+        "status": "PASS",
+        "confidence_score": 0.85,
+        "sources_used": 5,
+        "short_answer_preview": "This is a deterministic fake synthesis payload answer for testing.",
+        "findings_count": 1,
+        "is_mock_run": true
+      },
+      "defects": [],
+      "fix_status": "N/A"
+    },
+    {
+      "eval_id": "EVAL-03",
+      "type": "technical_pros_cons",
+      "query": "What are the pros and cons of using Rust for systems programming compared to C?",
+      "expected_tools": [
+        "web_search",
+        "fetch_page",
+        "quality_filter"
+      ],
+      "expected_behavior": "Structured pro/con list; honest about trade-offs; does not declare a definitive winner",
+      "grounding_requirement": "Pros and cons traceable to cited technical sources",
+      "edge_cases": [
+        "Opinion-heavy sources may introduce bias"
+      ],
+      "run_mode": "MOCK_OFFLINE",
+      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "outcome": {
+        "status": "PASS",
+        "confidence_score": 0.85,
+        "sources_used": 5,
+        "short_answer_preview": "This is a deterministic fake synthesis payload answer for testing.",
+        "findings_count": 1,
+        "is_mock_run": true
+      },
+      "defects": [],
+      "fix_status": "N/A"
+    },
+    {
+      "eval_id": "EVAL-04",
+      "type": "time_sensitive",
+      "query": "What are the most significant AI safety research papers published in 2024?",
+      "expected_tools": [
+        "web_search",
+        "fetch_page",
+        "quality_filter"
+      ],
+      "expected_behavior": "Should note recency limitation; flag that mocked data may not reflect real 2024 publications",
+      "grounding_requirement": "Citations should include publication dates where available",
+      "edge_cases": [
+        "Mock mode cannot provide genuinely recent results",
+        "Live run should show papers from after training cutoff"
+      ],
+      "run_mode": "MOCK_OFFLINE",
+      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "outcome": {
+        "status": "PASS_WITH_CAVEAT",
+        "confidence_score": 0.85,
+        "sources_used": 5,
+        "short_answer_preview": "This is a deterministic fake synthesis payload answer for testing.",
+        "findings_count": 1,
+        "is_mock_run": true,
+        "caveat": "Mock run: temporal accuracy cannot be validated without live search"
+      },
+      "defects": [
+        "Mock mode cannot verify recency; live evaluation needed with Tavily credentials"
+      ],
+      "fix_status": "Pending live API credentials"
+    },
+    {
+      "eval_id": "EVAL-05",
+      "type": "unanswerable_failure",
+      "query": "What is the exact GDP of the fictional country Ruritania in 2025?",
+      "expected_tools": [
+        "web_search"
+      ],
+      "expected_behavior": "System returns confidence=0, refuses to fabricate, states no evidence found",
+      "grounding_requirement": "Must NOT hallucinate a GDP figure; must state inability to answer",
+      "edge_cases": [
+        "System must not confabulate a plausible-sounding number"
+      ],
+      "run_mode": "MOCK_OFFLINE",
+      "run_timestamp": "2026-10-27T09:35:50+00:00",
+      "outcome": {
+        "status": "PASS",
+        "confidence_score": 0.0,
+        "sources_used": 0,
+        "short_answer_preview": "No verifiable evidence could be gathered to answer this question. Tools returned no authoritative results or encountered network/provider errors.",
+        "findings_count": 1,
+        "is_mock_run": true
+      },
+      "defects": [],
+      "fix_status": "N/A"
+    }
+  ],
+  "rubric": {
+    "rubric_version": "1.0",
+    "note": "This rubric is illustrative for a small evaluation set. It is NOT a scientific benchmark. Results in mock mode validate structural behavior, not answer quality.",
+    "dimensions": [
+      {
+        "name": "evidence_relevance",
+        "description": "Cited sources are topically relevant to the query",
+        "max_score": 5
+      },
+      {
+        "name": "citation_traceability",
+        "description": "Every finding cites at least one source ID that exists in answer.sources",
+        "max_score": 5
+      },
+      {
+        "name": "answer_coverage",
+        "description": "Short answer addresses the main intent of the query",
+        "max_score": 5
+      },
+      {
+        "name": "uncertainty_honesty",
+        "description": "Confidence score and rationale honestly reflect evidence completeness",
+        "max_score": 5
+      },
+      {
+        "name": "failure_robustness",
+        "description": "Zero-evidence case returns structured refusal, not fabrication",
+        "max_score": 5
+      },
+      {
+        "name": "output_schema_validity",
+        "description": "StructuredAnswer passes Pydantic validation without errors",
+        "max_score": 5
+      }
+    ],
+    "scoring_note": "Scores are assigned only to evidence actually observed in test runs, not theoretical capability."
+  },
+  "summary": {
+    "total_queries": 5,
+    "pass_count": 5,
+    "fail_count": 0,
+    "error_count": 0
+  }
+}
